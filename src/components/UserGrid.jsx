@@ -66,7 +66,6 @@ const UserGrid = ({ data }) => {
 
   return (
     <>
-      <div>UserGrid</div>
       <Modal
         title="User Details"
         open={isModalOpen}

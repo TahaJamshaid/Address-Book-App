@@ -1,7 +1,9 @@
 import Home from './views/Home';
-import Details from './views/Details';
 import Settings from './views/Settings';
 import ErrorPage from './views/ErrorPage';
+import './index.css';
+
+import { Layout } from 'antd';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -12,17 +14,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: 'details/:contactId',
-    element: <Details />,
-  },
-  {
     path: 'settings',
     element: <Settings />,
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Layout>
+      <RouterProvider router={router} />
+    </Layout>
+  );
 }
 
 export default App;

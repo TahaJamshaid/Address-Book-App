@@ -7,9 +7,9 @@ const useInfiniteScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight;
     const clientHeight = document.documentElement.clientHeight;
-    console.log(scrollTop, 'scrollTop');
-    console.log(scrollHeight, 'scrollHeight');
-    console.log(clientHeight, 'clientHeight');
+    // console.log(scrollTop, 'scrollTop');
+    // console.log(scrollHeight, 'scrollHeight');
+    // console.log(clientHeight, 'clientHeight');
     if (scrollTop + clientHeight + 10 >= scrollHeight) {
       setPage(page + 1);
     }
