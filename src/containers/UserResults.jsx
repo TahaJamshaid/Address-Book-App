@@ -1,29 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import requestUsers from '../api/userApi';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 import UserGrid from '../components/UserGrid';
 import { Image, Avatar } from 'antd';
-
-// for redux
-import { useDispatch } from 'react-redux';
+import useInfiniteScroll from '../hooks/useInfiniteScroll';
+// redux imports
+import { useSelector, useDispatch } from 'react-redux';
 import { addUsers } from '../redux/reducers/usersSlice';
 
 const UserResults = ({ searchTerm }) => {
-  const { data, error, isLoading } = useSWRImmutable(
-    '?results=100',
-    requestUsers
-  );
+  const page = useInfiniteScroll();
+
+  const {
+    data: newData,
+    error,
+    isLoading,
+  } = useSWR(`?page=${page}&results=100&seed=abc`, requestUsers);
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (newData) {
+      dispatch(addUsers(newData.results));
+      console.log(newData.results);
+    }
+  }, [newData]);
+  const data = useSelector((state) => state.users);
+
+  // if (isLoading) {
+  //   return <p>data is loading...</p>;
+  // }
+
+  // if (error) {
+  //   return <p>Error unable to fetch data</p>;
+  // }
 
   console.log('working');
 
-  if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
-
-  dispatch(addUsers(...data.results));
-
-  const filterData = data.results.filter(
+  const filterData = data.filter(
     (item) =>
       item.name.first.includes(searchTerm) ||
       item.name.last.includes(searchTerm)

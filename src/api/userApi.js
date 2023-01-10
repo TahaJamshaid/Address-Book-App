@@ -8,7 +8,7 @@ const requestUsers = async (query) => {
       params: {}
     });
 
-    console.log("fetching data.......")
+    console.log("fetching data.......", query)
     return res.data;
   } catch (err) {
     console.log(err);

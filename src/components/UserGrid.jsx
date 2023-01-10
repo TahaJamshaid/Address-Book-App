@@ -54,8 +54,6 @@ const UserGrid = ({ data }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  console.log(data);
-  console.log(modalData);
 
   data = data.map((item, key) => ({
     ...item,
