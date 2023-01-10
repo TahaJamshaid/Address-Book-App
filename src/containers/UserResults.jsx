@@ -21,7 +21,7 @@ const UserResults = ({ searchTerm }) => {
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
-  dispatch(addUsers(data));
+  dispatch(addUsers(...data.results));
 
   const filterData = data.results.filter(
     (item) =>
@@ -30,13 +30,21 @@ const UserResults = ({ searchTerm }) => {
   );
 
   let neededData = filterData.map((item, index) => ({
-    key: item.name + index,
+    key: index,
     firstName: item.name.first,
     lastName: item.name.last,
     titleOfName: item.name.title,
     username: item.login.username,
     email: item.email,
     gender: item.gender,
+    location: {
+      street: item.location.street,
+      city: item.location.city,
+      state: item.location.state,
+      postcode: item.location.postcode,
+    },
+    phone: item.phone,
+    cell: item.cell,
     thumbnail: (
       <Avatar
         src={<Image src={item.picture.thumbnail} style={{ width: 32 }} />}
