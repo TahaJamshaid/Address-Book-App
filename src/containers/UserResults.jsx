@@ -4,19 +4,24 @@ import useSWRImmutable from 'swr/immutable';
 import UserGrid from '../components/UserGrid';
 import { Image, Avatar } from 'antd';
 
+// for redux
+import { useDispatch } from 'react-redux';
+import { addUsers } from '../redux/reducers/usersSlice';
+
 const UserResults = ({ searchTerm }) => {
   const { data, error, isLoading } = useSWRImmutable(
     '?results=100',
     requestUsers
   );
 
+  const dispatch = useDispatch();
+
   console.log('working');
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
-  console.log('running');
-  console.log(data);
+  dispatch(addUsers(data));
 
   const filterData = data.results.filter(
     (item) =>
