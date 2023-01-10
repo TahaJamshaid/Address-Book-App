@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Search from '../containers/Search';
 import UserResults from '../containers/UserResults';
 
 const Home = () => {
-  console.log('running');
+  const [searchTerm, setSearchTerm] = useState('');
+  console.log(searchTerm);
   return (
     <>
-      <Search />
-      <UserResults />
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <UserResults searchTerm={searchTerm} />
     </>
   );
 };

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import requestUsers from '../api/userApi';
 import useSWRImmutable from 'swr/immutable';
 import UserGrid from '../components/UserGrid';
 import { Image, Avatar } from 'antd';
 
-const UserResults = () => {
+const UserResults = ({ searchTerm }) => {
   const { data, error, isLoading } = useSWRImmutable(
     '?results=100',
     requestUsers
@@ -18,7 +18,13 @@ const UserResults = () => {
   console.log('running');
   console.log(data);
 
-  let neededData = data.results.map((item, index) => ({
+  const filterData = data.results.filter(
+    (item) =>
+      item.name.first.includes(searchTerm) ||
+      item.name.last.includes(searchTerm)
+  );
+
+  let neededData = filterData.map((item, index) => ({
     key: item.name + index,
     firstName: item.name.first,
     lastName: item.name.last,

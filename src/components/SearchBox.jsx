@@ -2,13 +2,17 @@ import React from 'react';
 import { Input } from 'antd';
 import { Col, Row } from 'antd';
 
-const SearchBox = () => {
+const SearchBox = ({ searchTerm, handler }) => {
   return (
     <>
       <Row>
         <Col span={8}></Col>
         <Col span={8}>
-          <Input placeholder="Enter Name" />
+          <Input
+            placeholder="Enter Name"
+            value={searchTerm}
+            onChange={handler}
+          />
         </Col>
         <Col span={8}></Col>
       </Row>
