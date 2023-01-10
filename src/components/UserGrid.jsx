@@ -18,6 +18,11 @@ const columns = [
     key: 'lastName',
   },
   {
+    title: 'Username',
+    dataIndex: 'username',
+    key: 'username',
+  },
+  {
     title: 'email',
     dataIndex: 'email',
     key: 'email',

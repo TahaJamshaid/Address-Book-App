@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import SearchBox from '../components/SearchBox';
 
 const Search = () => {
   return (
-    <div>Search</div>
-  )
-}
+    <>
+      <SearchBox />
+    </>
+  );
+};
 
-export default Search
+export default Search;

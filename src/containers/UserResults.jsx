@@ -1,11 +1,14 @@
 import React from 'react';
 import requestUsers from '../api/userApi';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import UserGrid from '../components/UserGrid';
 import { Image, Avatar } from 'antd';
 
 const UserResults = () => {
-  const { data, error, isLoading } = useSWR('?results=50', requestUsers);
+  const { data, error, isLoading } = useSWRImmutable(
+    '?results=100',
+    requestUsers
+  );
 
   console.log('working');
 
@@ -15,10 +18,12 @@ const UserResults = () => {
   console.log('running');
   console.log(data);
 
-  let neededData = data.results.map((item) => ({
+  let neededData = data.results.map((item, index) => ({
+    key: item.name + index,
     firstName: item.name.first,
     lastName: item.name.last,
     titleOfName: item.name.title,
+    username: item.login.username,
     email: item.email,
     gender: item.gender,
     thumbnail: (
