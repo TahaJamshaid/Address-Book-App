@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row, Col, Typography, Layout, Space } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
 import SelectNationality from '../containers/SelectNationality';
+import { Link } from '@tanstack/react-router';
 
 const Settings = () => {
   // CH, ES, FR, GB
@@ -18,7 +18,6 @@ const Settings = () => {
 };
 
 const SettingsHeader = () => {
-  let navigation = useNavigate();
   return (
     <Layout.Header
       style={{
@@ -27,23 +26,19 @@ const SettingsHeader = () => {
     >
       <Row>
         <Col span={8}>
-          <Space
-            onClick={() => {
-              console.log('go back!!');
-              navigation(-1);
-            }}
-            style={{ cursor: 'pointer' }}
-          >
-            <ArrowLeftOutlined
-              style={{ fontSize: '24px', cursor: 'pointer' }}
-            />
-            <Typography.Title
-              style={{ paddingBottom: '15px', marginBottom: '15px' }}
-              level={4}
-            >
-              Back
-            </Typography.Title>
-          </Space>
+          <Link to="/">
+            <Space style={{ cursor: 'pointer' }}>
+              <ArrowLeftOutlined
+                style={{ fontSize: '24px', cursor: 'pointer' }}
+              />
+              <Typography.Title
+                style={{ paddingBottom: '15px', marginBottom: '15px' }}
+                level={4}
+              >
+                Back
+              </Typography.Title>
+            </Space>
+          </Link>
         </Col>
         <Col span={8}>
           <Typography.Title style={{ padding: '12px', margin: '0' }} level={2}>

@@ -2,6 +2,30 @@ import React from 'react';
 import { Select, Space, Row, Col } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeNationalityFilter } from '../redux/reducers/usersSlice';
+import SelectAntd from '../components/AntdComponents/SelectAntd';
+
+const options = [
+  {
+    value: 'None',
+    label: 'None',
+  },
+  {
+    value: 'CH',
+    label: 'Switzerland',
+  },
+  {
+    value: 'ES',
+    label: 'Spain',
+  },
+  {
+    value: 'GB',
+    label: 'Great Britain',
+  },
+  {
+    value: 'FR',
+    label: 'France',
+  },
+];
 
 const SelectNationality = () => {
   const dispatch = useDispatch();
@@ -18,34 +42,13 @@ const SelectNationality = () => {
       <Col span={8}>
         <Space>
           <p>Select Nationality:</p>
-          <Select
+          <SelectAntd
             defaultValue={nationalityFilter}
             style={{
               width: 160,
             }}
             onChange={handleChange}
-            options={[
-              {
-                value: 'None',
-                label: 'None',
-              },
-              {
-                value: 'CH',
-                label: 'Switzerland',
-              },
-              {
-                value: 'ES',
-                label: 'Spain',
-              },
-              {
-                value: 'GB',
-                label: 'Great Britain',
-              },
-              {
-                value: 'FR',
-                label: 'France',
-              },
-            ]}
+            options={options}
           />
         </Space>
       </Col>

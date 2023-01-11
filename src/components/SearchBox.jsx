@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { Input, Tag } from 'antd';
 import { Col, Row } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import InputAntd from '../components/AntdComponents/InputAntd';
+
+import { Link } from '@tanstack/react-router';
 import { useSelector } from 'react-redux';
 
 const SearchBox = ({ searchTerm, handler }) => {
   const nationalityFilter = useSelector(
     (state) => state.users.nationalityFilter
   );
-  let navigate = useNavigate();
   return (
     <>
       <Row>
@@ -17,7 +18,7 @@ const SearchBox = ({ searchTerm, handler }) => {
           <Tag color="purple">{nationalityFilter}</Tag>
         </Col>
         <Col span={8}>
-          <Input
+          <InputAntd
             placeholder="Enter Name"
             value={searchTerm}
             onChange={handler}
@@ -25,13 +26,9 @@ const SearchBox = ({ searchTerm, handler }) => {
         </Col>
         <Col span={4}></Col>
         <Col span={4}>
-          <SettingFilled
-            style={{ fontSize: '24px', cursor: 'pointer' }}
-            onClick={() => {
-              console.log('working');
-              navigate('/settings');
-            }}
-          />
+          <Link to="/settings">
+            <SettingFilled style={{ fontSize: '24px', cursor: 'pointer' }} />
+          </Link>
         </Col>
       </Row>
     </>

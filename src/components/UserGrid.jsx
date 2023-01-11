@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Table, Tag, Button, Modal } from 'antd';
+import TableAntd from '../components/AntdComponents/TableAntd';
 
 const columns = [
   {
@@ -83,7 +84,7 @@ const UserGrid = ({ data }) => {
         <Typography.Title level={5}>Phone: {modalData.phone}</Typography.Title>
         <Typography.Title level={5}>Cell: {modalData.cell}</Typography.Title>
       </Modal>
-      <Table dataSource={data} columns={columns} pagination={false} />;
+      <TableAntd dataSource={data} columns={columns} pagination={false} />
     </>
   );
 };

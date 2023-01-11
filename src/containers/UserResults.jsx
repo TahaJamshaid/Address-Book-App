@@ -30,8 +30,8 @@ const UserResults = ({ searchTerm }) => {
 
   const filterData = data.filter(
     (item) =>
-      (item.name.first.includes(searchTerm) ||
-        item.name.last.includes(searchTerm)) &&
+      (item.name.first.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.name.last.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (nationalityFilter != 'None' ? item.nat == nationalityFilter : true)
   );
 
