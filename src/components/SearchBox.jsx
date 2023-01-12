@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Input, Tag } from 'antd';
+import React from 'react';
+import { Tag } from 'antd';
 import { Col, Row } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import InputAntd from '../components/AntdComponents/InputAntd';

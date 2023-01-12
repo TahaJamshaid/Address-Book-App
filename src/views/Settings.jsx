@@ -1,11 +1,14 @@
 import React from 'react';
-import { Row, Col, Typography, Layout, Space } from 'antd';
+import { 
+  Row, Col, Typography, Layout, Space 
+} from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import SelectNationality from '../containers/SelectNationality';
 import { Link } from '@tanstack/react-router';
+import SelectNationality from '../containers/SelectNationality';
+
 
 const Settings = () => {
-  // CH, ES, FR, GB
+
 
   return (
     <>

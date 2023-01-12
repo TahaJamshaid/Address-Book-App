@@ -1,24 +1,19 @@
-import Home from './views/Home';
-import Settings from './views/Settings';
-// import ErrorPage from './views/ErrorPage';
-import './index.css';
-
+import React from 'react';
 import { Layout } from 'antd';
+import './index.css';
 
 import {
   Outlet,
   RouterProvider,
-  Link,
   createReactRouter,
   createRouteConfig,
 } from '@tanstack/react-router';
 
+import Home from './views/Home';
+import Settings from './views/Settings';
+
 const rootRoute = createRouteConfig({
-  component: () => (
-    <>
-      <Outlet />
-    </>
-  ),
+  component: () => <Outlet />,
 });
 const indexRoute = rootRoute.createRoute({
   path: '/',

@@ -2,28 +2,34 @@ import React, { useState, useEffect } from 'react';
 import requestUsers from '../api/userApi';
 import useSWR from 'swr';
 import UserGrid from '../components/UserGrid';
-import { Image, Avatar } from 'antd';
+import { Image, Avatar, Spin, Row, Col } from 'antd';
 import useInfiniteScroll from '../hooks/useInfiniteScroll';
 // redux imports
 import { useSelector, useDispatch } from 'react-redux';
 import { addUsers } from '../redux/reducers/usersSlice';
 
+const USERS_PER_PAGE = 100;
+
 const UserResults = ({ searchTerm }) => {
   const page = useInfiniteScroll();
+  const dispatch = useDispatch();
+  const nationalityFilter = useSelector(
+    (state) => state.users.nationalityFilter
+  );
 
   const {
     data: newData,
     error,
     isLoading,
-  } = useSWR(`?page=${page}&results=100&seed=abc`, requestUsers);
+  } = useSWR(`?page=${page}&results=${USERS_PER_PAGE}&seed=abc`, requestUsers);
   const data = useSelector((state) => state.users.users);
-  const nationalityFilter = useSelector(
-    (state) => state.users.nationalityFilter
-  );
 
-  const dispatch = useDispatch();
   useEffect(() => {
-    if (newData && data.length < 100 * page) {
+    if (
+      newData &&
+      data.length < USERS_PER_PAGE * page &&
+      nationalityFilter == 'None'
+    ) {
       dispatch(addUsers(newData.results));
     }
   }, [newData]);
@@ -58,10 +64,26 @@ const UserResults = ({ searchTerm }) => {
     ),
   }));
 
-  console.log(neededData);
+  if (data.length == 0 && isLoading) {
+    return (
+      <>
+        <Spin tip="Loading" size="large">
+          <div className="content" />
+        </Spin>
+      </>
+    );
+  }
   return (
     <>
       <UserGrid data={neededData} />
+      <Row align="center">
+        <Col span={6}></Col>
+        <Col span={5}>
+          <Spin tip="Loading" size="large">
+            <div className="content" />
+          </Spin>
+        </Col>
+      </Row>
     </>
   );
 };
